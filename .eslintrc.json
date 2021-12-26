@@ -1,0 +1,19 @@
+{
+  "env": {
+    "es6": true,
+    "node": true,
+    "jest": true
+  },
+  "extends": [
+    "airbnb-base"
+  ],
+  "parserOptions": {
+    "ecmaVersion": 12,
+    "sourceType": "script"
+  },
+  "ignorePatterns": ["public/*", "node_modules/*", "logs/*", "project/*"],
+  "rules": {
+    "no-console": "off",
+    "class-methods-use-this": "off"
+  }
+}

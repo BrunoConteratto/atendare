@@ -1,0 +1,177 @@
+<form id="form-lead" class="section" method="post" action="/api/lead/create">
+  <div class="section-header">
+    <div class="col-md-9">
+      <h1>Criar Lead</h1>
+    </div>
+    <div class="col-md-3">
+      <button type="submit" class="btn btn-primary float-right">
+        <i class="fas fa-plus"></i> Criar
+      </button>
+      <a href="/leads" class="btn btn-default2 float-right">
+        <i class="fas fa-arrow-left"></i> Voltar
+      </a>
+    </div>
+  </div>
+
+  <div class="section-body">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h4>Basico</h4>
+        </div>
+        <div class="card-body">
+          <div class="form-group form-row">
+            <div class="col-md-4">
+              <label>Nome</label>
+              <input type="text" class="form-control" name="name" minlength="4" maxlength="40" pattern=".{4,40}" required>
+            </div>
+            <div class="col-md-4">
+              <label>Email</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="fas fa-at"></i>
+                  </div>
+                </div>
+                <input type="email" class="form-control" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label>Telefone</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="fas fa-phone"></i>
+                  </div>
+                </div>
+                <input type="text" class="form-control" name="phone" data-mask="(00) 00000-0000" length="15" pattern=".{15}" required>
+              </div>
+            </div>
+          </div>
+          <div class="form-group form-row">
+            <div class="col-md-4">
+              <label>CPF</label>
+              <input type="text" class="form-control" name="cpf" data-mask="000.000.000-00" length="14" pattern=".{14}">
+            </div>
+            <div class="col-md-4">
+              <label>Imagem</label>
+              <input type="text" class="form-control" name="image" minlength="10" maxlength="1024" pattern=".{10,1024}">
+            </div>
+            <div class="col-md-4">
+              <label>Etapa</label>
+              <select class="form-control" name="stage_id">
+                <option value="8">Qualificação</option>
+                <option value="9">Em Análise</option>
+                <option value="10">Proposta de valor</option>
+                <option value="11">Em Negociação</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group form-row">
+            <div class="col-md-4">
+              <label>Data</label>
+              <input type="date" class="form-control" name="birthdate">
+            </div>
+            <div class="col-md-4">
+              <label>Genero</label>
+              <select class="form-control" name="gender">
+                <option value="1">Masculino</option>
+                <option value="2">Femenino</option>
+                <option value="3">Outro</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label>Organização</label>
+              <select class="form-control" name="company_id">
+                {{#each organizations.results}}
+                <option value="{{id}}">{{name}}</option>
+                {{/each}}
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h4>Endereços</h4>
+          <div class="form-group m-0 form-inline">
+            <select class="form-control" ui-select-address></select>
+            <button type="button" class="btn btn-primary mx-1" ui-add-address>
+              <i class="fas fa-plus"></i>
+            </button>
+            <button type="button" class="btn btn-primary mx-1" ui-remove-address>
+              <i class="fas fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-primary mx-1" ui-edit-address>
+              <i class="fas fa-edit"></i>
+            </button>
+          </div>
+        </div>
+        <div class="card-body">
+          <form></form>
+          <form id="form-address" data-type="create">
+            <div class="form-group form-row">
+              <div class="col-md-2">
+                <label>País</label>
+                <input type="text" class="form-control" name="country" minlength="4" maxlength="40" pattern=".{4,40}">
+              </div>
+              <div class="col-md-2">
+                <label>Estado</label>
+                <input type="text" class="form-control" name="state" minlength="4" maxlength="40" pattern=".{4,40}">
+              </div>
+              <div class="col-md-2">
+                <label>Cod. Postal</label>
+                <input type="text" class="form-control" name="postalCode" data-mask="00000-000" length="9" pattern=".{9}">
+              </div>
+              <div class="col-md-3">
+                <label>Cidade</label>
+                <input type="text" class="form-control" name="city" minlength="4" maxlength="40" pattern=".{4,40}">
+              </div>
+            </div>
+            <div class="form-group form-row">
+              <div class="col-md-4">
+                <label>Endereço</label>
+                <input type="text" class="form-control" name="address" minlength="4" maxlength="40" pattern=".{4,40}">
+              </div>
+              <div class="col-md-1">
+                <label>Numero</label>
+                <input type="text" class="form-control" name="number" minlength="1" maxlength="4" pattern=".{1,4}">
+              </div>
+              <div class="col-md-4">
+                <label>Complemento</label>
+                <input type="text" class="form-control" name="complement" minlength="4" maxlength="20" pattern=".{4,20}">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h4>Contatos</h4>
+        </div>
+        <div class="card-body form-inline">
+          <div class="col-md-6">
+            <span>E-mails</span>
+            <div class="col-md-12 mt-2 border p-1"></div>
+            <div class="col-md-12 mt-2">
+              <button type="button" class="btn btn-primary float-right" ui-add-mail>
+                <i class="fas fa-plus"></i> Adicionar
+              </button>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <span>Telefones</span>
+            <div class="col-md-12 mt-2 border p-1"></div>
+            <div class="col-md-12 mt-2">
+              <button type="button" class="btn btn-primary float-right" ui-add-phone>
+                <i class="fas fa-plus"></i> Adicionar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

@@ -1,0 +1,87 @@
+<section class="section">
+  <div class="section-header">
+    <h1>Leads</h1>
+  </div>
+
+  <div class="section-body">
+    <div class="row">
+      <div class="col-12">
+        <div class="card">
+          <div class="card-header">
+            <div class="w-100">
+              <a href="/lead/create" class="btn btn-primary">
+                <i class="fas fa-plus"></i> Novo
+              </a>
+            </div>
+            <div class="card-header-form">
+              <form>
+                <div class="input-group">
+                  <input type="text" class="form-control" placeholder="Search">
+                  <div class="input-group-btn">
+                    <button class="btn btn-primary"><i class="fas fa-search"></i></button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="card-body p-0">
+            <div class="table-responsive">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th></th>
+                    <th>Nome</th>
+                    <th>Email</th>
+                    <th>Telefone</th>
+                    <th>CPF</th>
+                    <th>Ações</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {{#each data.results}}
+                  <tr data-id="{{id}}" lead-row>
+                    <td>
+                      <img alt="image" src="{{image}}" class="rounded-circle" width="35" data-toggle="tooltip" title="" data-original-title="Wildan Ahdian">
+                    </td>
+                    <td>{{name}}</td>
+                    <td>{{email}}</td>
+                    <td>{{phone}}</td>
+                    <td>{{cpf}}</td>
+                    <td>
+                      <button class="btn btn-outline-danger" btn-remove>
+                        <i class="fas fa-trash"></i>
+                      </button>
+                      <a href="/lead/edit/{{id}}" class="btn btn-outline-info">
+                        <i class="fas fa-edit"></i>
+                      </a>
+                    </td>
+                  </tr>
+                  {{/each}}
+                </tbody>
+              </table>
+            </div>
+          </div>
+          <div class="card-footer text-right">
+            <nav class="d-inline-block">
+              <ul class="pagination mb-0">
+                <li class="page-item {{#if (eq pageIndex '0')}}disabled{{/if}}">
+                  <a class="page-link" href="/leads/{{eval pageIndex '-' 1}}/{{pageSize}}" tabindex="-1">
+                    <i class="fas fa-chevron-left"></i>
+                  </a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="/leads/{{pageIndex}}/{{pageSize}}">{{eval pageIndex '+' 1}}</a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link" href="/leads/{{eval pageIndex '+' 1}}/{{pageSize}}">
+                    <i class="fas fa-chevron-right"></i>
+                  </a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

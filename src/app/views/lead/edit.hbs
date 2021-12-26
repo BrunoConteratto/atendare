@@ -1,0 +1,206 @@
+<form id="form-lead" class="section" method="post" action="/api/lead/update/{{id}}">
+  <div class="section-header">
+    <div class="col-md-9">
+      <h1>#{{id}} Editar Lead</h1>
+    </div>
+    <div class="col-md-3">
+      <button type="submit" class="btn btn-primary float-right">
+        <i class="fas fa-plus"></i> Atualizar
+      </button>
+      <a href="/lead" class="btn btn-default2 float-right">
+        <i class="fas fa-arrow-left"></i> Voltar
+      </a>
+    </div>
+  </div>
+
+  <div class="section-body">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header">
+          <h4>Basico</h4>
+        </div>
+        <div class="card-body">
+          <div class="form-group form-row">
+            <div class="col-md-4">
+              <label>Nome</label>
+              <input type="text" class="form-control" name="name" value="{{name}}" minlength="4" maxlength="40" pattern=".{4,40}" required>
+            </div>
+            <div class="col-md-4">
+              <label>Email</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="fas fa-at"></i>
+                  </div>
+                </div>
+                <input type="text" class="form-control" name="email" value="{{email}}" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,4}$" required>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <label>Telefone</label>
+              <div class="input-group">
+                <div class="input-group-prepend">
+                  <div class="input-group-text">
+                    <i class="fas fa-phone"></i>
+                  </div>
+                </div>
+                <input type="text" class="form-control" name="phone" value="{{phone}}" data-mask="(00) 00000-0000" length="15" pattern=".{15}" required>
+              </div>
+            </div>
+          </div>
+          <div class="form-group form-row">
+            <div class="col-md-4">
+              <label>CPF</label>
+              <input type="text" class="form-control" name="cpf" value="{{cpf}}" data-mask="000.000.000-00" length="14" pattern=".{14}">
+            </div>
+            <div class="col-md-4">
+              <label>Imagem</label>
+              <input type="text" class="form-control" name="image" value="{{image}}" minlength="10" maxlength="1024" pattern=".{10,1024}">
+            </div>
+            <div class="col-md-4">
+              <label>Etapa</label>
+              <select class="form-control" name="stage_id">
+                <option value="8" {{#if (eq stage_id 8)}}selected{{/if}}>Qualificação</option>
+                <option value="9" {{#if (eq stage_id 9)}}selected{{/if}}>Em Análise</option>
+                <option value="10" {{#if (eq stage_id 10)}}selected{{/if}}>Proposta de valor</option>
+                <option value="11" {{#if (eq stage_id 11)}}selected{{/if}}>Em Negociação</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group form-row">
+            <div class="col-md-4">
+              <label>Data</label>
+              <input type="date" class="form-control" name="birthdate" value="{{substr birthdate 0 10}}">
+            </div>
+            <div class="col-md-4">
+              <label>Genero</label>
+              <select class="form-control" name="gender">
+                <option value="1" {{#if (eq gender 1)}}selected{{/if}}>Masculino</option>
+                <option value="2" {{#if (eq gender 2)}}selected{{/if}}>Femenino</option>
+                <option value="3" {{#if (eq gender 3)}}selected{{/if}}>Outro</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <label>Organização</label>
+              <select class="form-control" name="company_id">
+                {{#each organizations.results}}
+                <option value="{{id}}" {{#if (eq ../company_id id)}}selected{{/if}}>{{name}}</option>
+                {{/each}}
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <script>
+        window.form_addresses = {{{json addresses}}};
+      </script>
+      <div class="card">
+        <div class="card-header">
+          <h4>Endereços</h4>
+          <div class="form-group m-0 form-inline">
+            <select class="form-control" ui-select-address>
+              {{#each addresses}}
+              <option value="{{id}}">{{address}}</option>
+              {{/each}}
+            </select>
+            <button type="button" class="btn btn-primary mx-1" ui-add-address>
+              <i class="fas fa-plus"></i>
+            </button>
+            <button type="button" class="btn btn-primary mx-1" ui-remove-address>
+              <i class="fas fa-minus"></i>
+            </button>
+            <button type="button" class="btn btn-primary mx-1" ui-edit-address>
+              <i class="fas fa-edit"></i>
+            </button>
+          </div>
+        </div>
+        <div class="card-body">
+          <form></form>
+          <form id="form-address" data-type="edit">
+            <div class="form-group form-row">
+              <div class="col-md-2">
+                <label>País</label>
+                <input type="text" class="form-control" name="country" value="{{addresses.[0].country}}" minlength="4" maxlength="40" pattern=".{4,40}">
+              </div>
+              <div class="col-md-2">
+                <label>Estado</label>
+                <input type="text" class="form-control" name="state" value="{{addresses.[0].state}}" minlength="4" maxlength="40" pattern=".{4,40}">
+              </div>
+              <div class="col-md-2">
+                <label>Cod. Postal</label>
+                <input type="text" class="form-control" name="postalCode" value="{{addresses.[0].postalCode}}" data-mask="00000-000" length="9" pattern=".{9}">
+              </div>
+              <div class="col-md-3">
+                <label>Cidade</label>
+                <input type="text" class="form-control" name="city" value="{{addresses.[0].city}}" minlength="4" maxlength="40" pattern=".{4,40}">
+              </div>
+            </div>
+            <div class="form-group form-row">
+              <div class="col-md-4">
+                <label>Endereço</label>
+                <input type="text" class="form-control" name="address" value="{{addresses.[0].address}}" minlength="4" maxlength="40" pattern=".{4,40}">
+              </div>
+              <div class="col-md-1">
+                <label>Numero</label>
+                <input type="text" class="form-control" name="number" value="{{addresses.[0].number}}" minlength="1" maxlength="4" pattern=".{1,4}">
+              </div>
+              <div class="col-md-4">
+                <label>Complemento</label>
+                <input type="text" class="form-control" name="complement" value="{{addresses.[0].complement}}" minlength="4" maxlength="20" pattern=".{4,20}">
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-header">
+          <h4>Contatos</h4>
+        </div>
+        <div class="card-body form-inline">
+          <div class="col-md-6">
+            <span>E-mails</span>
+            <div class="col-md-12 mt-2 border p-1">
+              {{#each emails}}
+              <div class="input-group col-md-12 m-1">
+                <input type="email" class="form-control" name="emails[]" value="{{this}}" required>
+                <div class="input-group-append">
+                  <button class="btn btn-danger" type="button" ui-remove>
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </div>
+              {{/each}}
+            </div>
+            <div class="col-md-12 mt-2">
+              <button type="button" class="btn btn-primary float-right" ui-add-mail>
+                <i class="fas fa-plus"></i> Adicionar
+              </button>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <span>Telefones</span>
+            <div class="col-md-12 mt-2 border p-1">
+              {{#each phones}}
+              <div class="input-group col-md-12 m-1">
+                <input type="text" class="form-control" name="phones[]" value="{{this}}" data-mask="(00) 00000-0000" length="15" pattern=".{15}" required>
+                <div class="input-group-append">
+                  <button class="btn btn-danger" type="button" ui-remove>
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </div>
+              {{/each}}
+            </div>
+            <div class="col-md-12 mt-2">
+              <button type="button" class="btn btn-primary float-right" ui-add-phone>
+                <i class="fas fa-plus"></i> Adicionar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
