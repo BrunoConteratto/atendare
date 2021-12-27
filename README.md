@@ -4,8 +4,11 @@ Template HTML: <https://github.com/stisla/stisla>
 
 Configurar em **.env** token da API.
 
+Requer NPM
+
 ```
-Run: npm run dev
+npm install
+npm run dev
 ```
 
 ## **Rotas**
